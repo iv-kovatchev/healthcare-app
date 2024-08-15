@@ -1,12 +1,14 @@
 "use client"
 
-import formSchema from '@/components/forms/PatientForm/formSchema';
+import { patientFormSchema } from '@/components/forms/PatientForm/patientFormSchema';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
 import CustomFormField from '@/components/forms/CustomFormField';
+import SubmitButton from '@/components/forms/SubmitButton';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -19,15 +21,33 @@ export enum FormFieldType {
 }
 
 const PatientForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const form = useForm<z.infer<typeof patientFormSchema>>({
+    resolver: zodResolver(patientFormSchema),
     defaultValues: {
-      username: ''
+      name: '',
+      email: '',
+      phone: ''
     },
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async ({ name, email, phone }: z.infer<typeof patientFormSchema>) => {
+    setIsLoading(true);
+
+    try {
+      /*const userData = { name, email, phone };
+
+      const user = await createUser(userData);
+
+      if(user) {
+        router.push(`/patients/${user.id}/register`);
+      }*/
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -68,7 +88,7 @@ const PatientForm = () => {
           iconAlt='user'
         />
 
-        <Button type='submit'>Submit</Button>
+        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
   )

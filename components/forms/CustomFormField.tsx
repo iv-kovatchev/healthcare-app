@@ -1,6 +1,6 @@
 'use client'
 
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Control } from 'react-hook-form';
 import { FormFieldType } from '@/components/forms/PatientForm/PatientForm';
@@ -67,10 +67,11 @@ const RenderInput = ({ field, props }: RenderInputProps) => {
             defaultCountry='BG'
             placeholder={placeholder}
             international
-            withCounteryCallingCode
+            withCountryCallingCode
             value={field.value as E164Number | undefined}
             onChange={field.onChange}
             className='input-phone'
+
           />
         </FormControl>
       )
