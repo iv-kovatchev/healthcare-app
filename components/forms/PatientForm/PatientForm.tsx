@@ -9,6 +9,7 @@ import CustomFormField from '@/components/forms/CustomFormField';
 import SubmitButton from '@/components/forms/SubmitButton';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { createUser } from '@/lib/actions/patient.actions';
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -36,18 +37,18 @@ const PatientForm = () => {
   const onSubmit = async ({ name, email, phone }: z.infer<typeof patientFormSchema>) => {
     setIsLoading(true);
 
-    try {
-      /*const userData = { name, email, phone };
+    /*try {
+      const userData = { name, email, phone };
 
       const user = await createUser(userData);
 
       if(user) {
         router.push(`/patients/${user.id}/register`);
-      }*/
+      }
     }
     catch (error) {
       console.log(error);
-    }
+    }*/
   }
 
   return (
