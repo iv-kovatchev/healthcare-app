@@ -24,7 +24,7 @@ export default function Home() {
               © 2024 Healthcare
             </p>
             <Link href='/?admin=true' className='text-green-500'>
-              Admin
+              Admin WORKFLOOOOW
             </Link>
           </div>
         </div>
