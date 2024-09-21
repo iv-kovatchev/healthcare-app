@@ -24,20 +24,19 @@
 #    See the documentation for each action used below for the recommended IAM policies for this IAM user,
 #    and best practices on handling the access key credentials.
 
-
 name: Deploy to EC2
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master" ]  # Ensure this matches your working branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-24-04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Install SSH Key
         uses: webfactory/ssh-agent@v0.7.0
@@ -47,9 +46,9 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_IP }} << 'EOF'
-          cd healthcare-app
-          git pull origin main
-          npm install
-          npm run build
-          pm2 restart all
+          cd healthcare-app || exit 1
+          git pull origin master || exit 1
+          npm ci || exit 1
+          npm run build || exit 1
+          pm2 restart your-app-name || exit 1  # Replace with your actual app name
           EOF
