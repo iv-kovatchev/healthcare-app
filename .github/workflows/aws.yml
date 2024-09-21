@@ -33,7 +33,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -58,7 +58,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd healthcare-app
-            git pull origin main
+            git pull origin master
             npm install
             npm run build
-            pm2 restart all
+            pm2 restart healthcare-app
