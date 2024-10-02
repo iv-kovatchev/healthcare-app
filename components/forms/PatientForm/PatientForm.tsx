@@ -5,20 +5,11 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
-import CustomFormField from '@/components/forms/CustomFormField';
+import CustomFormField, { FormFieldType } from '@/components/forms/CustomFormField';
 import SubmitButton from '@/components/forms/SubmitButton';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-export enum FormFieldType {
-  INPUT = 'input',
-  TEXTAREA = 'textarea',
-  PHONE = 'phoneInput',
-  CHECKBOX = 'checkbox',
-  DATE_PICKER = 'datePicker',
-  SELECT = 'select',
-  SKELETON = 'skeleton'
-}
+import { createUser } from '@/lib/actions/patient.actions';
 
 const PatientForm = () => {
   const router = useRouter();
@@ -37,17 +28,19 @@ const PatientForm = () => {
     setIsLoading(true);
 
     try {
-      /*const userData = { name, email, phone };
+      const userData = { name, email, phone };
 
       const user = await createUser(userData);
 
       if(user) {
-        router.push(`/patients/${user.id}/register`);
-      }*/
+        router.push(`/patients/${user.$id}/register`);
+      }
     }
     catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   }
 
   return (

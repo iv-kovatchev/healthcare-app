@@ -16,7 +16,7 @@ const SubmitButton = ({ isLoading, className, children }: SubmitButtonProps) => 
       {isLoading ?
         (<div>
           <Image
-            src='/assets/images/loader.svg'
+            src='/assets/icons/loader.svg'
             alt='loader'
             width={24}
             height={24}
